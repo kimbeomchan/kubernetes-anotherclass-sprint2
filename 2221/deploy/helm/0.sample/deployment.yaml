@@ -29,11 +29,11 @@ spec:
         instance: api-tester-2221
         version: 1.0.0
     spec:
-      nodeSelector:
-        kubernetes.io/hostname: k8s-master
+      #nodeSelector:
+        #kubernetes.io/hostname: k8s-master
       containers:
         - name: api-tester-2221
-          image: 1pro/api-tester:v1.0.0
+          image: beomchankim/api-tester:v1.0.0
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
