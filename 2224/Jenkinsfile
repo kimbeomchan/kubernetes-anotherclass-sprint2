@@ -69,7 +69,7 @@ pipeline {
                     }
 
                     // 도커 빌드
-                    sh "docker build ./${CLASS_NUM}/build/docker -t ${DOCKERHUB_USERNAME}/api-tester:${TAG}"
+                    sh "docker buildx build ./${CLASS_NUM}/build/docker -t ${DOCKERHUB_USERNAME}/api-tester:${TAG} --platform linux/amd64"
 
                     // [2] 잦은 배포 - versioning 무의미, 계획된 배포 - versioning 필수
                     sh "docker push ${DOCKERHUB_USERNAME}/api-tester:${TAG}"
