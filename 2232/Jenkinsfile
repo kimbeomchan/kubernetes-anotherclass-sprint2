@@ -78,9 +78,10 @@ pipeline {
                     }
 
                     // 도커 빌드 및 업로드
-                    sh "docker build --platform linux/amd64 ./${CLASS_NUM}/build/docker -t ${DOCKERHUB_USERNAME}/api-tester:${TAG}"
-                    sh "docker push ${DOCKERHUB_USERNAME}/api-tester:${TAG}"
-
+                    //sh "docker build --platform linux/amd64 ./${CLASS_NUM}/build/docker -t ${DOCKERHUB_USERNAME}/api-tester:${TAG}"
+                    //sh "docker push ${DOCKERHUB_USERNAME}/api-tester:${TAG}"
+                    sh "docker buildx build --builder multiarch-builder --platform linux/amd64,linux/arm64 -t ${DOCKERHUB_USERNAME}/api-tester:${TAG} --push ."
+                    
                     // 도커 이미지 삭제
                     sh "docker rmi ${DOCKERHUB_USERNAME}/api-tester:${TAG}"
                 }
